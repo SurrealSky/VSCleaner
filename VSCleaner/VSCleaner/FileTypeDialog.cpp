@@ -148,7 +148,26 @@ void CFileTypeDialog::OnBtnDelFileType()
 
 void CFileTypeDialog::OnClickFileTypeItem( NMHDR* pNMHDR, LRESULT* pResult )
 {
-    POSITION pos =  NULL;
+    NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+
+    if (pNMListView)
+    {
+        CString strKey = m_wndList.GetItemText(pNMListView->iItem, 0);
+        BOOL bCheck = m_wndList.GetCheck(pNMListView->iItem);
+
+        if (bCheck)
+            bCheck = FALSE;
+        else
+            bCheck = TRUE;
+
+        m_wndList.SetCheck(pNMListView->iItem, bCheck);
+
+        CFileManager* pFileManager = theApp.GetFileManager();
+        ASSERT(pFileManager);
+        pFileManager->SetFileTypeCheck(strKey, bCheck);
+    }
+
+    /*POSITION pos =  NULL;
     pos = m_wndList.GetFirstSelectedItemPosition();
     
     if ( pos != NULL ) {
@@ -167,7 +186,7 @@ void CFileTypeDialog::OnClickFileTypeItem( NMHDR* pNMHDR, LRESULT* pResult )
         CFileManager* pFileManager = theApp.GetFileManager();
         ASSERT( pFileManager );
         pFileManager->SetFileTypeCheck( strKey, bCheck );
-	}
+	}*/
 
 	*pResult = 0;
 }
