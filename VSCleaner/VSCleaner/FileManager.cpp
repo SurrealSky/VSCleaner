@@ -46,6 +46,7 @@ UINT CFileManager::ThreadProc( LPVOID lParam )
 
 BOOL CFileManager::FindSubDir( CString strPath, HookFileManager* pHookFileManager )
 {
+    strPath = "D:\\³ÌÐò\\VSCleaner\\VSCleaner\\Bin\\Debug";
     if ( strPath.IsEmpty() )
 		return FALSE;
 
@@ -75,7 +76,7 @@ BOOL CFileManager::FindSubDir( CString strPath, HookFileManager* pHookFileManage
  		}
         else {
             strFileType = fileFind.GetFileName();
-			if (strFileType.GetLength()-strFileType.Find("VC.db") == 5)
+			if (strFileType.Find("VC.db")!=-1&&strFileType.GetLength()-strFileType.Find("VC.db") == 5)
 			{
 				strFileType = "VC.db";
 			}
