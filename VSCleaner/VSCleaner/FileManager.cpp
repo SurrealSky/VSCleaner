@@ -46,7 +46,6 @@ UINT CFileManager::ThreadProc( LPVOID lParam )
 
 BOOL CFileManager::FindSubDir( CString strPath, HookFileManager* pHookFileManager )
 {
-    strPath = "D:\\³ÌÐò\\VSCleaner\\VSCleaner\\Bin\\Debug";
     if ( strPath.IsEmpty() )
 		return FALSE;
 
